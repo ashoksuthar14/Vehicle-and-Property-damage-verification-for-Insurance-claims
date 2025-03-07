@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Car Insurance - Insurance Solutions{% endblock %}
+
+{% block extra_css %}
+<style>
+    .dashboard-header {
+        background: var(--gradient-dark);
+        padding: 6rem 2rem 4rem;
+        text-align: center;
+        color: var(--text-light);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .dashboard-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('{{ url_for('static', filename='images/car-pattern.png') }}') repeat;
+        opacity: 0.05;
+        animation: slide 20s linear infinite;
+    }
+
+    .dashboard-container {
+        max-width: 1200px;
+        margin: -50px auto 4rem;
+        padding: 2rem;
+    }
+
+    .policy-login {
+        max-width: 500px;
+        margin: 0 auto 2rem;
+        padding: 2rem;
+        background: var(--primary-light);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px var(--shadow-color);
+        border: 1px solid var(--secondary-dark);
+    }
+
+    .policy-details {
+        display: none;
+        background: var(--primary-light);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px var(--shadow-color);
+        padding: 2rem;
+        margin-top: 2rem;
+        border: 1px solid var(--secondary-dark);
+    }
+
+    .policy-details.active {
+        display: block;
+        animation: fadeIn 0.5s ease;
+    }
+
+    .detail-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .detail-card {
+        background: var(--secondary-light);
+        padding: 1.5rem;
+        border-radius: 15px;
+        transition: all 0.3s ease;
+        border: 1px solid var(--secondary-dark);
+    }
+
+    .detail-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px var(--shadow-color);
+    }
+
+    .detail-card h3 {
+        color: var(--text-dark);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .detail-card i {
+        color: var(--accent-color);
+    }
+
+    .detail-card p {
+        color: var(--text-dark);
+    }
+
+    .detail-card strong {
+        color: var(--primary-dark);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--text-dark);
+        font-weight: 500;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid var(--secondary-dark);
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+        background: var(--primary-light);
+        color: var(--text-dark);
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1);
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .action-button {
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 30px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .action-button.primary {
+        background: var(--primary-dark);
+        color: var(--text-light);
+    }
+
+    .action-button.secondary {
+        background: var(--accent-color);
+        color: var(--text-dark);
+    }
+
+    .action-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px var(--shadow-color);
+    }
+
+    .action-button.primary:hover {
+        background: var(--accent-color);
+        color: var(--text-dark);
+    }
+
+    .action-button.secondary:hover {
+        background: var(--primary-dark);
+        color: var(--text-light);
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+        .dashboard-container {
+            margin: -30px 1rem 2rem;
+            padding: 1rem;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+        }
+
+        .action-button {
+            width: 100%;
+            text-align: center;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Manage Your Car Insurance</h1>
+    <p>Access and manage your policy details</p>
+</div>
+
+<div class="dashboard-container">
+    <div class="policy-login" data-aos="fade-up">
+        <h2>Login to Your Policy</h2>
+        <form id="policyLoginForm">
+            <div class="form-group">
+                <label for="policyNumber">Policy Number</label>
+                <input type="text" id="policyNumber" name="policyNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="dateOfBirth">Date of Birth</label>
+                <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+            </div>
+            <button type="button" class="action-button primary" onclick="showPolicyDetails()">View Policy</button>
+        </form>
+    </div>
+
+    <div class="policy-details" id="policyDetails" data-aos="fade-up">
+        <h2>Policy Details</h2>
+        <div class="detail-cards">
+            <div class="detail-card">
+                <h3><i class="fas fa-car"></i> Vehicle Information</h3>
+                <p><strong>Make:</strong> Toyota</p>
+                <p><strong>Model:</strong> Camry</p>
+                <p><strong>Year:</strong> 2022</p>
+                <p><strong>Registration:</strong> ABC123</p>
+            </div>
+
+            <div class="detail-card">
+                <h3><i class="fas fa-shield-alt"></i> Coverage Details</h3>
+                <p><strong>Policy Type:</strong> Comprehensive</p>
+                <p><strong>Start Date:</strong> 01/01/2024</p>
+                <p><strong>End Date:</strong> 31/12/2024</p>
+                <p><strong>Status:</strong> Active</p>
+            </div>
+
+            <div class="detail-card">
+                <h3><i class="fas fa-file-invoice-dollar"></i> Payment Information</h3>
+                <p><strong>Premium:</strong> $1,200/year</p>
+                <p><strong>Next Payment:</strong> 01/07/2024</p>
+                <p><strong>Payment Method:</strong> Credit Card</p>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="#" class="action-button primary">Download Policy Document</a>
+            <a href="#" class="action-button secondary">Renew Policy</a>
+            <a href="{{ url_for('claims') }}" class="action-button primary">File a Claim</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function showPolicyDetails() {
+        const policyDetails = document.getElementById('policyDetails');
+        policyDetails.classList.add('active');
+    }
+</script>
+{% endblock %} 

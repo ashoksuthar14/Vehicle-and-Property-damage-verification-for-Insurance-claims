@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InSure - Protect What Matters</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.74/build/spline-viewer.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #1a1a1a;
+            --secondary-dark: #2c2c2c;
+            --primary-light: #ffffff;
+            --secondary-light: #f5f5f5;
+            --accent-color: #ffd700;
+            --text-dark: #1a1a1a;
+            --text-light: #ffffff;
+            --text-gray: #666666;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --gradient-dark: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+        }
+
+        body {
+            background-color: var(--primary-light);
+            color: var(--text-dark);
+        }
+
+        .navbar {
+            background: var(--primary-dark);
+            box-shadow: 0 2px 10px var(--shadow-color);
+        }
+
+        .logo a {
+            color: var(--text-light);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-color);
+        }
+
+        .nav-links a::after {
+            background: var(--accent-color);
+        }
+
+        .nav-button {
+            background: var(--accent-color) !important;
+            color: var(--text-dark) !important;
+        }
+
+        .nav-button:hover {
+            background: #e6c200 !important;
+            transform: scale(1.05);
+        }
+
+        .hero {
+            background: var(--gradient-dark);
+        }
+
+        .hero-content {
+            background: linear-gradient(to top, rgba(26, 26, 26, 0.9) 0%, rgba(26, 26, 26, 0.6) 50%, transparent 100%);
+        }
+
+        .hero-content h1 {
+            color: var(--text-light);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content p {
+            color: var(--text-light);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .insurance-cards {
+            padding: 4rem 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: var(--primary-dark);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--accent-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--accent-color);
+        }
+
+        .card-icon {
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-content h2 {
+            color: var(--text-light);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .card-content p {
+            color: var(--text-light);
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .card .cta-button {
+            background: var(--accent-color);
+            color: var(--text-dark);
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .card .cta-button:hover {
+            background: #e6c200;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background: var(--primary-dark);
+            color: var(--text-light);
+        }
+
+        .footer-section h3 {
+            color: var(--accent-color);
+        }
+
+        .footer-section ul li a,
+        .footer-section p {
+            color: var(--text-light);
+            opacity: 0.9;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle span {
+                background: var(--text-light);
+            }
+
+            .nav-links {
+                background: var(--primary-dark);
+            }
+
+            .insurance-cards {
+                padding: 3rem 1rem;
+            }
+
+            .card {
+                padding: 2rem 1.5rem;
+            }
+
+            .card-icon {
+                font-size: 3rem;
+            }
+
+            .card-content h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="{{ url_for('home') }}">In<span>Sure</span></a>
+            </div>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}" class="{{ 'active' if request.endpoint == 'home' }}">Home</a></li>
+                <li><a href="{{ url_for('services') }}" class="{{ 'active' if request.endpoint == 'services' }}">Services</a></li>
+                <li><a href="{{ url_for('about') }}" class="{{ 'active' if request.endpoint == 'about' }}">About Us</a></li>
+                <li><a href="{{ url_for('claims') }}" class="{{ 'active' if request.endpoint == 'claims' }}">Claims</a></li>
+                <li><a href="{{ url_for('contact') }}" class="{{ 'active' if request.endpoint == 'contact' }}">Contact</a></li>
+                <li><a href="#" class="nav-button">Get Quote</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <spline-viewer 
+            url="https://prod.spline.design/zfZ75O8Lg6Elbn6G/scene.splinecode"
+            loading-anim="true"
+            background="transparent"
+            events-target="global"
+            camera-target="0 0 0"
+            camera-orbit="-45deg 45deg 8m">
+        </spline-viewer>
+        <div class="hero-content">
+            <h1>Protect What Matters Most</h1>
+            <p>Comprehensive vehicle insurance solutions for your peace of mind</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="insurance-cards">
+            <div class="card" data-aos="fade-up">
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-car-side"></i>
+                    </div>
+                    <h2>Vehicle Insurance</h2>
+                    <p>Comprehensive coverage for your vehicle with 24/7 roadside assistance and competitive rates.</p>
+                    <a href="{{ url_for('vehicle_insurance') }}" class="cta-button">Learn More</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Claims</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@insure.com</p>
+                <p>Phone: 1-800-INSURE</p>
+                <p>Address: 123 Insurance St, City, State</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 InSure. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 

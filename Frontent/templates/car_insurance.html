@@ -1,0 +1,275 @@
+{% extends "base.html" %}
+
+{% block title %}Car Insurance Dashboard - Insurance Solutions{% endblock %}
+
+{% block extra_head %}
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.74/build/spline-viewer.js"></script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .dashboard-header {
+        background: var(--gradient-dark);
+        padding: 0;
+        text-align: center;
+        color: var(--text-light);
+        position: relative;
+        overflow: hidden;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .spline-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    spline-viewer {
+        width: 100%;
+        height: 100%;
+    }
+
+    .header-content {
+        position: relative;
+        z-index: 3;
+        padding: 3rem;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 25px;
+        backdrop-filter: blur(10px);
+        margin: 2rem;
+        max-width: 600px;
+        border: 2px solid var(--accent-color);
+        transition: all 0.3s ease;
+    }
+
+    .header-content:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-content h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--accent-color);
+    }
+
+    .header-content p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+    }
+
+    .dashboard-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+    }
+
+    .insurance-options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+        margin-top: 2rem;
+    }
+
+    .option-card {
+        background: var(--primary-light);
+        border-radius: 20px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 10px 30px var(--shadow-color);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--secondary-dark);
+    }
+
+    .option-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: var(--accent-color);
+    }
+
+    .option-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .option-icon {
+        font-size: 3rem;
+        color: var(--accent-color);
+        margin-bottom: 1.5rem;
+    }
+
+    .option-title {
+        font-size: 1.8rem;
+        color: var(--text-dark);
+        margin-bottom: 1rem;
+    }
+
+    .option-description {
+        color: var(--text-gray);
+        margin-bottom: 2rem;
+    }
+
+    .features-list {
+        text-align: left;
+        margin-bottom: 2rem;
+        padding-left: 1.5rem;
+        color: var(--text-dark);
+    }
+
+    .features-list li {
+        margin-bottom: 0.8rem;
+        position: relative;
+    }
+
+    .features-list li::before {
+        content: '✓';
+        color: var(--accent-color);
+        position: absolute;
+        left: -1.5rem;
+    }
+
+    .option-button {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: var(--primary-dark);
+        color: var(--text-light);
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .option-button:hover {
+        background: var(--accent-color);
+        color: var(--text-dark);
+        transform: translateY(-2px);
+    }
+
+    .option-button.secondary {
+        background: var(--secondary-dark);
+    }
+
+    .option-button.secondary:hover {
+        background: var(--accent-color);
+    }
+
+    .cta-section {
+        background: var(--gradient-dark);
+        padding: 4rem 2rem;
+        color: var(--text-light);
+        margin-top: 4rem;
+    }
+
+    .cta-button {
+        display: inline-block;
+        padding: 1rem 2rem;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .cta-button:not(.secondary) {
+        background: var(--accent-color);
+        color: var(--text-dark);
+    }
+
+    .cta-button.secondary {
+        background: transparent;
+        color: var(--text-light);
+        border: 2px solid var(--text-light);
+    }
+
+    .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-button.secondary:hover {
+        background: var(--accent-color);
+        border-color: var(--accent-color);
+        color: var(--text-dark);
+    }
+
+    @media (max-width: 768px) {
+        .insurance-options {
+            grid-template-columns: 1fr;
+        }
+
+        .dashboard-header {
+            height: 80vh;
+        }
+
+        .header-content {
+            padding: 2rem;
+            margin: 1rem;
+        }
+
+        .header-content h1 {
+            font-size: 2rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <div class="spline-container">
+        <spline-viewer url="https://prod.spline.design/lBBc-wRo2fL8Tfsu/scene.splinecode"></spline-viewer>
+    </div>
+    <div class="header-content">
+        <h1>Vehicle Insurance Dashboard</h1>
+        <p>Choose the option that best suits your needs</p>
+    </div>
+</div>
+
+<div class="dashboard-container">
+    <div class="insurance-options">
+        <div class="option-card" data-aos="fade-right">
+            <div class="option-icon">
+                <i class="fas fa-car"></i>
+            </div>
+            <h2 class="option-title">New Insurance</h2>
+            <p class="option-description">Get comprehensive coverage for your vehicle with our new insurance plans</p>
+            <ul class="features-list">
+                <li>Instant policy issuance</li>
+                <li>Competitive premium rates</li>
+                <li>24/7 roadside assistance</li>
+                <li>Cashless claim settlements</li>
+                <li>Personal accident cover</li>
+            </ul>
+            <a href="{{ url_for('new_vehicle_insurance') }}" class="option-button">Get New Policy</a>
+        </div>
+
+        <div class="option-card" data-aos="fade-left">
+            <div class="option-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h2 class="option-title">Existing Insurance</h2>
+            <p class="option-description">Manage your existing policy and access exclusive benefits</p>
+            <ul class="features-list">
+                <li>View policy details</li>
+                <li>Download documents</li>
+                <li>Track claims status</li>
+                <li>Renew policy online</li>
+                <li>Update information</li>
+            </ul>
+            <a href="{{ url_for('manage_vehicle_insurance') }}" class="option-button secondary">Manage Policy</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %} 

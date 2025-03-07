@@ -60,6 +60,6 @@ This project is open-source and licensed under the MIT License.
 Ashok Suthar
 Yash Sharma 
 Shaikh Imran Nizzamudin
-Contact
-For any queries, reach out at [your email/contact].
+Contact +91 879564789
+For any queries, reach out at insure@gmail.com.
 

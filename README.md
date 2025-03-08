@@ -6,7 +6,7 @@ Insure is an API designed to verify vehicle damage for insurance claims. This sy
 
 ## Links 
 
-### [UpScale - Website ](https://insure-dypdpu-hackathon.vercel.app/)
+### [Insure - Website ](https://insure-dypdpu-hackathon.vercel.app/)
 
 
 # 🛠️ Features

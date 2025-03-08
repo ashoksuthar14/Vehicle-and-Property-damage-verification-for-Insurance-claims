@@ -1,0 +1,14 @@
+{
+  "name": "insurance-recommender",
+  "version": "1.0.0",
+  "description": "An AI-powered insurance recommendation system",
+  "scripts": {
+    "build": "netlify deploy --prod"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.1.3"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  }
+} 

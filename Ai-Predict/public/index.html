@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ... previous head content ... -->
+<script>
+    document.getElementById('insuranceForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = {
+            age: parseInt(document.getElementById('age').value),
+            location: document.getElementById('location').value,
+            drivingExperience: document.getElementById('drivingExperience').value + " years",
+            vehicleUsage: document.getElementById('vehicleUsage').value,
+            vehicleType: document.getElementById('vehicleType').value,
+            budget: document.getElementById('budget').value,
+            previousClaims: document.getElementById('previousClaims').value,
+            parkingType: document.getElementById('parkingType').value,
+            annualMileage: document.getElementById('annualMileage').value
+        };
+
+        try {
+            const response = await fetch('/.netlify/functions/recommend', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const recommendation = await response.text();
+            document.getElementById('recommendationContent').innerHTML = recommendation;
+            document.getElementById('recommendationResult').classList.remove('d-none');
+            
+            // Scroll to recommendation
+            document.getElementById('recommendationResult').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Failed to get recommendation. Please try again.');
+        }
+    });
+</script>
+</body>
+</html> 

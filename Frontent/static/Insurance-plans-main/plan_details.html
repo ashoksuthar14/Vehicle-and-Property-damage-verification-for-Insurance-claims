@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Plan Details</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <nav>
+        <h1>Insurance Plan Details</h1>
+        <a href="index.html">Back to Plans</a>
+    </nav>
+    <div class="container" id="plan-details"></div>
+
+    <script>
+        // Retrieve the company name from the URL query parameters
+        const params = new URLSearchParams(window.location.search);
+        const companyName = params.get('company');
+
+        // Sample insurancePlans object for demonstration
+        const insurancePlans = {
+            // (Re-use or re-fetch the full insurancePlans object as needed)
+        };
+
+        // Find company details by name
+        const getCompanyDetails = (companyName) => {
+            for (const category in insurancePlans) {
+                const plan = insurancePlans[category].find(plan => plan.name === companyName);
+                if (plan) return plan;
+            }
+            return null;
+        };
+
+        // Display company details
+        const displayCompanyDetails = (company) => {
+            const container = document.getElementById('plan-details');
+            if (company) {
+                container.innerHTML = `
+                    <img src="${company.logo}" alt="${company.name} Logo">
+                    <h2>${company.name}</h2>
+                    <p><strong>Plan Type:</strong> ${company.planType}</p>
+                    <p><strong>Price:</strong> ${company.price}</p>
+                    ${company.ClaimsSettled ? `<p><strong>Claims Settled:</strong> ${company.ClaimsSettled}</p>` : ""}
+                    ${company.ClaimBenefits ? `<p><strong>Claim Benefits:</strong> ${company.ClaimBenefits}</p>` : ""}
+                    <p><strong>About:</strong> [Add detailed company description here]</p>
+                `;
+            } else {
+                container.innerHTML = `<p>Company details not found.</p>`;
+            }
+        };
+
+        // Get and display the company details
+        const companyDetails = getCompanyDetails(companyName);
+        displayCompanyDetails(companyDetails);
+    </script>
+</body>
+</html>

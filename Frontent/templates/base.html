@@ -6,6 +6,25 @@
     <title>{% block title %}InSure - Protect What Matters{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Botpress Chatbot Scripts -->
+    <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+    <script>
+        window.botpressWebChat.init({
+            "composerPlaceholder": "Chat with us!",
+            "botConversationDescription": "This chatbot is at your service",
+            "botId": "2024102517325",
+            "hostUrl": "https://cdn.botpress.cloud/webchat/v2.3",
+            "messagingUrl": "https://messaging.botpress.cloud",
+            "clientId": "2024102517325",
+            "webhookId": "2024102517325",
+            "lazySocket": false,
+            "themeName": "prism",
+            "frontendVersion": "v2.3",
+            "showPoweredBy": false,
+            "theme": "prism",
+            "themeColor": "#ffd700"
+        });
+    </script>
     <style>
         :root {
             --primary-dark: #1a1a1a;
@@ -311,7 +330,7 @@
                 <li><a href="{{ url_for('about') }}" class="{{ 'active' if request.endpoint == 'about' }}">About Us</a></li>
                 <li><a href="{{ url_for('claims') }}" class="{{ 'active' if request.endpoint == 'claims' }}">Claims</a></li>
                 <li><a href="{{ url_for('contact') }}" class="{{ 'active' if request.endpoint == 'contact' }}">Contact</a></li>
-                <li><a href="#" class="nav-button">Get Quote</a></li>
+                
             </ul>
         </div>
     </nav>

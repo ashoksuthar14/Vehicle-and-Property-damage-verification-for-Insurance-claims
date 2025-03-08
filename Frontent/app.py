@@ -26,9 +26,17 @@ def contact():
 def vehicle_insurance():
     return render_template('car_insurance.html')
 
-@app.route('/vehicle-insurance/new')
-def new_vehicle_insurance():
-    return render_template('new_vehicle_insurance.html')
+@app.route('/vehicle-insurance/claims')
+def insurance_claims():
+    return render_template('claim_insurance.html')
+
+@app.route('/vehicle-insurance/claims/damage-detector')
+def damage_detector():
+    return render_template('damage_detector.html')
+
+@app.route('/vehicle-insurance/claims/live-detection')
+def live_detection():
+    return render_template('live_detection.html')
 
 @app.route('/vehicle-insurance/manage')
 def manage_vehicle_insurance():

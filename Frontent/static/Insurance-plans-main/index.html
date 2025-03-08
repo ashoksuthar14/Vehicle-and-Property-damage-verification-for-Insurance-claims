@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Insurance Plans</title>
+    <link rel="stylesheet" href="../Insurance-plans-main/style.css">
+</head>
+<body>
+    <nav>
+       
+        <ul>
+            <li><a href="#third-party">Third Party Insurance</a></li>
+            <li><a href="#comprehensive">Comprehensive Plans</a></li>
+            <li><a href="#own-damage">Own Damage Plans</a></li>
+            <li><a href="#trending">Trending Plans</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section id="third-party">
+            <h2>Third Party Insurance</h2>
+            <div class="card-container" id="third-party-cards"></div>
+        </section>
+
+        <section id="comprehensive">
+            <h2>Comprehensive Plans</h2>
+            <div class="card-container" id="comprehensive-cards"></div>
+        </section>
+
+        <section id="own-damage">
+            <h2>Own Damage Plans</h2>
+            <div class="card-container" id="own-damage-cards"></div>
+        </section>
+
+        <section id="trending">
+            <h2>Trending Plans</h2>
+            <div class="card-container" id="trending-cards"></div>
+        </section>
+
+       
+    </div>
+
+    <!-- Modal for displaying company details -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Contact info box -->
+
+
+    <script src="../Insurance-plans-main/script.js"></script>
+</body>
+</html>

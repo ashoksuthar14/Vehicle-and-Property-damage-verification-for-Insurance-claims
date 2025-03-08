@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Details Fetcher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin: 0 auto;
+            width: 50%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .car-details {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+        }
+
+        .car-details h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .car-details p {
+            line-height: 1.6;
+        }
+
+        .car-details p span {
+            font-weight: bold;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>Enter Car Number to Get Details</h2>
+    <form id="carForm">
+        <label for="car_number">Car Number:</label>
+        <input type="text" id="car_number" name="car_number" required>
+        <button type="submit">Get Car Details</button>
+    </form>
+    
+    <div class="car-details" id="carDetails">
+        <!-- Car details will be displayed here -->
+    </div>
+
+    <script>
+        document.getElementById("carForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const carNumber = document.getElementById("car_number").value;
+            
+            // Fetch car details from the backend
+            fetch("/get_car_details", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `car_number=${carNumber}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                const detailsContainer = document.getElementById("carDetails");
+                detailsContainer.innerHTML = "";
+
+                if (data.error) {
+                    detailsContainer.innerHTML = `<span class="error">${data.error}</span>`;
+                } else {
+                    detailsContainer.innerHTML = `
+                        <h3>Car Details:</h3>
+                        <p><span>Owner Name:</span> ${data.data.owner_name || "N/A"}</p>
+                        <p><span>Chassis Number:</span> ${data.data.chassis_no || "N/A"}</p>
+                        <p><span>Engine Number:</span> ${data.data.engine_no || "N/A"}</p>
+                        <p><span>Fitness Upto:</span> ${data.data.fitness_upto || "N/A"}</p>
+                        <p><span>Fuel Type:</span> ${data.data.fuel_type || "N/A"}</p>
+                        <p><span>Insurance Company:</span> ${data.data.insurance_company || "N/A"}</p>
+                        <p><span>Insurance Upto:</span> ${data.data.insurance_upto || "N/A"}</p>
+                        <p><span>Maker Model:</span> ${data.data.maker_model || "N/A"}</p>
+                        <p><span>Manufacture Month-Year:</span> ${data.data.manufacture_month_year || "N/A"}</p>
+                        <p><span>RC Status:</span> ${data.data.rc_status || "N/A"}</p>
+                        
+                        <h3>Other Details:</h3>
+                        <p><span>Registration Number:</span> ${data.data.registration_no || "N/A"}</p>
+                        <p><span>Registration Date:</span> ${data.data.registration_date || "N/A"}</p>
+                        <p><span>Registration Authority:</span> ${data.data.registration_authority || "N/A"}</p>
+                        <p><span>Vehicle Color:</span> ${data.data.vehicle_color || "N/A"}</p>
+                        <p><span>Seat Capacity:</span> ${data.data.seat_capacity || "N/A"}</p>
+                        <p><span>PUC Upto:</span> ${data.data.puc_upto || "N/A"}</p>
+                        <p><span>Vehicle Type:</span> ${data.data.vehicle_type || "N/A"}</p>
+                    `;
+                }
+            })
+            .catch(error => {
+                document.getElementById("carDetails").innerHTML = "<span class='error'>Error fetching details.</span>";
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>

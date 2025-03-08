@@ -9,18 +9,24 @@ Insure is an API designed to verify vehicle damage for insurance claims. This sy
 ### [Insure - Website ](https://insure-dypdpu-hackathon.vercel.app/)
 
 
+<img src="home page hack.jpg" />
+
 # 🛠️ Features
 
 ✅ Automated Damage Detection – Uses AI/ML models to detect damages from images/videos.<br />
   <br />
+
+  <img src="damage detection.jpg" />
 ✅ Fraud Prevention – Identifies suspicious or manipulated claims.<br />
   <br />
+  <img src="gnn 3.png" />
 ✅ Location-Based Inspection – Verifies claim locations using GPS data.<br />
 <br />
 ✅ Claim Cost Estimation – Provides an estimated repair cost for damages.<br />
 <br />
+<img src="claim hack.jpg" />
 ✅ Seamless Integration – Can be integrated with existing insurance platforms.<br /><br />
-
+<img src="no insurance hack.jpg" />
 # 🏗 Tech Stack
 🔹 Backend: Python, Flask/Django, FastAPI<br />
 🔹 AI/ML: TensorFlow, OpenCV, YOLOv11<br />
